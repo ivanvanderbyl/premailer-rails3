@@ -11,6 +11,7 @@ describe PremailerRails::Hook do
       let(:message) { Fixtures::Message.with_parts :html }
 
       it 'should create a text part from the html part' do
+        message.text_part.should be_nil
         PremailerRails::Premailer.any_instance.expects(:to_plain_text)
         run_hook(message)
         message.text_part.should be_a Mail::Part

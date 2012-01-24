@@ -1,6 +1,6 @@
 module PremailerRails
   class Premailer < ::Premailer
-    def initialize(html)
+    def initialize(html, options = {})
       # In order to pass the CSS as string to super it is necessary to access
       # the parsed HTML beforehand. To do so, the adapter needs to be
       # initialized. The ::Premailer::Adaptor handles the discovery of a
@@ -14,7 +14,7 @@ module PremailerRails
       options = PremailerRails3.config.merge(
         :with_html_string => true,
         :css_string       => CSSHelper.css_for_doc(doc)
-      )
+      ).update(options)
       super(html, options)
     end
   end
